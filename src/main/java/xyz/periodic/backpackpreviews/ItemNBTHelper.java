@@ -87,7 +87,7 @@ public final class ItemNBTHelper {
 
 
     public static boolean verifyExistence(ItemStack stack, String tag) {
-        return !stack.isEmpty() && detectNBT(stack) && getNBT(stack).hasKey(tag);
+        return !(stack == null) && detectNBT(stack) && getNBT(stack).hasKey(tag);
     }
 
     @Deprecated

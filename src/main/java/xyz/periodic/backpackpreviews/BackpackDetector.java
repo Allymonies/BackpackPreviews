@@ -35,15 +35,14 @@ public class BackpackDetector {
     public static int getNumSlots(ItemStack stack) {
         if (isBackpack(stack)) {
             String itemId = getHypixelId(stack);
-            switch (itemId) {
-                case "SMALL_BACKPACK":
-                    return 9;
-                case "MEDIUM_BACKPACK":
-                    return 18;
-                case "LARGE_BACKPACK":
-                    return 27;
-                default:
-                    return 9;
+            if (itemId.equals("SMALL_BACKPACK")) {
+                return 9;
+            } else if (itemId.equals("MEDIUM_BACKPACK")) {
+                return 18;
+            } else if (itemId.equals("LARGE_BACKPACK")) {
+                return 27;
+            } else {
+                return 9;
             }
         } else {
             return 0;
@@ -53,15 +52,14 @@ public class BackpackDetector {
     public static String getTagName(ItemStack stack) {
         if (isBackpack(stack)) {
             String itemId = getHypixelId(stack);
-            switch (itemId) {
-                case "SMALL_BACKPACK":
-                    return "small_backpack_data";
-                case "MEDIUM_BACKPACK":
-                    return "medium_backpack_data";
-                case "LARGE_BACKPACK":
-                    return "large_backpack_data";
-                default:
-                    return "small_backpack_data";
+            if (itemId.equals("SMALL_BACKPACK")) {
+                return "small_backpack_data";
+            } else if (itemId.equals("MEDIUM_BACKPACK")) {
+                return "medium_backpack_data";
+            } else if (itemId.equals("LARGE_BACKPACK")) {
+                return "large_backpack_data";
+            } else {
+                return "small_backpack_data";
             }
         } else {
             return "";
@@ -86,16 +84,16 @@ public class BackpackDetector {
                         enchTag.setShort("level", (short) 1);
                         tagList.appendTag(enchTag);
                     }
-                    ItemStack itemStack = new ItemStack(item);
+                    ItemStack itemStack = ItemStack.loadItemStackFromNBT(item);
                     return itemStack;
                 } catch (IOException e) {
                     // WOOPS
                     LogManager.getLogger().info("I/O Exception");
                 }
             }
-            return ItemStack.EMPTY;
+            return null;
         } else {
-            return ItemStack.EMPTY;
+            return null;
         }
     }
 }
