@@ -78,6 +78,14 @@ public class BackpackDetector {
                     NBTTagList items = backpackData.getTagList("i", Constants.NBT.TAG_COMPOUND);
                     NBTTagCompound item = items.getCompoundTagAt(slot);
                     item.setString("id", Short.toString(item.getShort("id")));
+                    NBTTagCompound itemTag = item.getCompoundTag("tag");
+                    if (itemTag.hasKey("ench")) {
+                        NBTTagList tagList = itemTag.getTagList("ench", Constants.NBT.TAG_COMPOUND);
+                        NBTTagCompound enchTag = new NBTTagCompound();
+                        enchTag.setShort("id", (short) 16);
+                        enchTag.setShort("level", (short) 1);
+                        tagList.appendTag(enchTag);
+                    }
                     ItemStack itemStack = new ItemStack(item);
                     return itemStack;
                 } catch (IOException e) {
